@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD Flask</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">CRUD Flask</h1>
+
+        <form method="POST" action="/adicionar" class="mt-4">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="senha2">Confirme a Senha:</label>
+                <input type="password" name="senha2" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <input type="text" name="empresa" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="messages mt-4">
+            {% for message in messages %}
+            <li class="alert alert-info">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Empresa</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in pessoas %}
+                <tr>
+                    <td>{{ pessoa.nome }}</td>
+                    <td>{{ pessoa.email }}</td>
+                    <td>{{ pessoa.telefone }}</td>
+                    <td>{{ pessoa.empresa }}</td>
+                    <td><a href="/deletar/{{ pessoa.id }}" class="btn btn-danger">Deletar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
